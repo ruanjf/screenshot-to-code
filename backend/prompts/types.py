@@ -9,6 +9,7 @@ class SystemPrompts(TypedDict):
     ionic_tailwind: str
     vue_tailwind: str
     svg: str
+    react_ant_design: str
 
 
 Stack = Literal[
@@ -19,4 +20,5 @@ Stack = Literal[
     "ionic_tailwind",
     "vue_tailwind",
     "svg",
+    "react_ant_design",
 ]

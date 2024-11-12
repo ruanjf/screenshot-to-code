@@ -13,6 +13,7 @@ Supported stacks:
 - Bootstrap
 - Ionic + Tailwind
 - SVG
+- React + AntDesign
 
 Supported AI models:
 
