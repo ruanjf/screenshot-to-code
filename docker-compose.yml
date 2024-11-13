@@ -22,6 +22,6 @@ services:
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile_preview
     ports:
       - "5173:5173"
