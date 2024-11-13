@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist, createJSONStorage } from 'zustand/middleware'
 import { AppState } from "../types";
 
 // Store for app-wide state
@@ -17,7 +18,7 @@ interface AppStore {
   disableInSelectAndEditMode: () => void;
 }
 
-export const useAppStore = create<AppStore>((set) => ({
+export const useAppStore = create(persist<AppStore>((set) => ({
   appState: AppState.INITIAL,
   setAppState: (state: AppState) => set({ appState: state }),
 
@@ -33,4 +34,7 @@ export const useAppStore = create<AppStore>((set) => ({
   toggleInSelectAndEditMode: () =>
     set((state) => ({ inSelectAndEditMode: !state.inSelectAndEditMode })),
   disableInSelectAndEditMode: () => set({ inSelectAndEditMode: false }),
+}), {
+  name: 'screenshot-to-code-app', // name of the item in the storage (must be unique)
+  storage: createJSONStorage(() => localStorage), // (optional) by default, 'localStorage' is used
 }));

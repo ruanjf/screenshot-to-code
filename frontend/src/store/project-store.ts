@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist, createJSONStorage } from 'zustand/middleware'
 import { Commit, CommitHash } from "../components/commits/types";
 
 // Store for app-wide state
@@ -35,7 +36,7 @@ interface ProjectStore {
   resetExecutionConsoles: () => void;
 }
 
-export const useProjectStore = create<ProjectStore>((set) => ({
+export const useProjectStore = create(persist<ProjectStore>((set) => ({
   // Inputs and their setters
   inputMode: "image",
   setInputMode: (mode) => set({ inputMode: mode }),
@@ -146,4 +147,7 @@ export const useProjectStore = create<ProjectStore>((set) => ({
       },
     })),
   resetExecutionConsoles: () => set({ executionConsoles: {} }),
+}), {
+  name: 'screenshot-to-code-project', // name of the item in the storage (must be unique)
+  storage: createJSONStorage(() => localStorage), // (optional) by default, 'localStorage' is used
 }));
